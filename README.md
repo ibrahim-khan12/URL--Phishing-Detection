@@ -57,6 +57,48 @@ This project performs an end-to-end analysis of URL phishing detection, implemen
 4. **Domain Characteristics**: Unusual TLDs and excessive subdomains correlate with phishing
 5. **Combined Features**: Multiplicative features show better class separation
 
+## 📊 Sample Results
+
+### Class Distribution
+```
+phishing    540
+clean       460
+Name: Verdict, dtype: int64
+Balanced: True
+```
+
+### Feature Comparison
+- **Phishing URLs tend to be longer**:  
+  Average phishing URL length is higher than clean URLs.
+- **TLS Usage**:  
+  Both phishing and clean URLs commonly use TLS.
+- **Unusual TLDs**:  
+  Phishing URLs more frequently use uncommon TLDs.
+
+### Combined Feature Separation
+- The combined feature `url_length × subdomain_count` shows better class separation:
+  - Phishing URLs have higher values for this feature.
+
+### Pattern Testing
+- **Claim:** "Phishing URLs are always longer than clean ones."
+  ```
+  Min phishing length: 34
+  Max clean length: 120
+  Claim holds: False
+  ```
+- **Claim:** "Older domains are always clean."
+  ```
+  Any phishing in oldest? False
+  ```
+
+### Example URLs
+- **Phishing:**  
+  - `http://192.168.1.1/login.php?user=abc`
+  - `https://secure-paypal.com.verify.account.ru/secure`
+- **Clean:**  
+  - `https://www.microsoft.com/en-us`
+  - `https://www.harvard.edu/academics`
+
 ## 🔧 Technical Implementation
 
 ```python
